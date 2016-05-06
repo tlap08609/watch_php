@@ -1,0 +1,53 @@
+
+header {
+    background-color: #15191D;
+}
+
+.menu li a:hover {
+    color: gray;
+    transition: 0.8s;
+}
+.topbar {
+    background-color: black;
+    font-size: 1.2em;
+}
+.topbar a {
+    color: white;
+    line-height: 8px;
+}
+.menu {
+    line-height: 80px;
+    list-style-type: none;
+    font-size: 20px;
+    font-family: 微軟正黑體;
+    color: white;
+    background-color: #15191D;
+}
+.menu li a {
+    color: white;
+}
+
+.logogroup {
+    color: white;
+    position: relative;
+}
+
+.logopic {
+    font-family: 'Aldrich', sans-serif;
+    font-size: 80px;
+    font-weight: 600;
+    color: white;
+}
+
+.logotext {
+    font-size: 14px;
+    position: absolute;
+/*     left: 149px;
+    top: 28px; */
+    left:49%;
+    top:27%;
+}
+
+.glyphicons .glyphicons-user {
+    color: white;
+}

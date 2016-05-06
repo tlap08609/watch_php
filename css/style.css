@@ -1,0 +1,450 @@
+/*共用點*/
+* {
+	font-family: 微軟正黑體;
+}
+
+p {
+	font-size: 18px;
+}
+
+body {
+	background: url("../images/background.png") no-repeat fixed center;
+}
+
+.portfolio-item {
+	margin-bottom: 25px;
+}
+
+.tim {
+	margin: 150px auto;
+	color: white;
+}
+
+.tt {
+	color: white;
+}
+.tti {
+	/* margin-left: 70px; */
+	
+}
+
+.ttt {
+	border: 1px dashed gray;
+	text-align: center;
+}
+
+h1 {
+	color: white;
+}
+
+.main {
+	/* 		
+		margin:0 auto;
+		padding-top:30px;
+text-align:center;
+		line-height: 150%;
+		border:3px solid red;
+		color:white;
+		
+		 */
+	width: 100%;
+	height: 680px;
+	background: url(../images/about_bg.jpg) top left no-repeat;
+	line-height: 40px;
+}
+
+.main-mask {
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 700px;
+	/* 			
+			margin-top:-30px; */
+}
+
+.main-text {
+	padding: 50px;
+}
+
+/*---------------clock-----------------*/
+.clock {
+	position: absolute;
+	left: 700px;
+	top: -19px;
+	width: 600px;
+	height: 600px;
+	/*border: solid 1px black;*/
+	background: url(../images/clock.png) left top no-repeat;
+	background-size: 600px 600px;
+}
+
+.clock .secGroup, .clock .minGroup, .clock .hrGroup {
+	position: absolute;
+	left: 50%;
+	top: 46.5%;
+}
+
+.clock .secGroup .secHand {
+	position: absolute;
+	width: 2px;
+	height: 100px;
+	background-color: #1E4092;
+	border-radius: 1px;
+	left: -1px;
+	top: -99px;
+}
+
+.clock .minGroup .minHand {
+	position: absolute;
+	width: 4px;
+	height: 80px;
+	background-color: #1E4092;
+	border-radius: 2px;
+	left: -2px;
+	top: -78px;
+}
+
+.clock .hrGroup .hrHand {
+	position: absolute;
+	width: 6px;
+	height: 50px;
+	background-color: #1E4092;
+	border-radius: 3px;
+	left: -3px;
+	top: -47px;
+}
+
+.inp1 {
+	position: relative;
+	left: 0.5%;
+}
+
+.inp2 {
+	position: relative;
+	left: 9%;
+}
+
+.bottom_1 {
+	padding-bottom: 50px;
+}
+
+.zoom {
+	display: inline-block;
+	position: relative;
+}
+
+.zoom img {
+	display: block;
+}
+
+/* 3 box animation */
+.com-box1 {
+	position: relative;
+	/* 	overflow: hidden; */
+}
+
+.com-box1 .text {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	opacity: 0;
+	transition: 0.5s;
+	color: white;
+	width: 100%;
+}
+
+.com-box1 a:hover .text {
+	position: absolute;
+	top: 82%;
+	left: 0%;
+	opacity: 1;
+}
+
+.com-box2 {
+	position: relative;
+	/* 	overflow: hidden; */
+}
+
+.com-box2 .text {
+	position: absolute;
+	top: 80%;
+	left: 0%;
+	opacity: 0;
+	transition: 0.5s;
+	color: white;
+	width: 100%;
+}
+
+.com-box2 a:hover .text {
+	position: absolute;
+	top: 80%;
+	left: 25%;
+	opacity: 1;
+}
+
+.com-box3 {
+	position: relative;
+	/* 	overflow: hidden; */
+}
+
+.com-box3 .text {
+	position: absolute;
+	top: 82%;
+	left: 45%;
+	opacity: 0;
+	transition: 0.5s;
+	color: white;
+	width: 100%;
+}
+
+.com-box3 a:hover .text {
+	position: absolute;
+	top: 82%;
+	left: 5%;
+	opacity: 1;
+}
+
+/*choose頁面 */
+.wrapper {
+	position: relative;
+	width: 100%;
+	height: 650px;
+	display: inline-block;
+}
+
+.boxLeft {
+	width: 33%;
+	height: 650px;
+	display: block;
+	position: absolute;
+	/*background-color: #060;*/
+}
+
+.boxRight {
+	width: 200px;
+	height: 650px;
+	display: block;
+	right: 0;
+	position: absolute;
+	/*background-color: #060;*/
+}
+
+.boxCenter {
+	width: 34%;
+	display: block;
+	left: 29%;
+	top: 110px;
+	position: absolute;
+}
+
+.box {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.5);
+	position: absolute;
+	display: none;
+}
+
+.box1 {
+	left: 0;
+	top: 10px;
+}
+
+.box2 {
+	left: 0;
+	top: 230px;
+}
+
+.box3 {
+	left: 0;
+	top: 450px;
+}
+
+.box4 {
+	right: 0;
+	top: 10px;
+}
+
+.box5 {
+	right: 0;
+	top: 230px;
+}
+
+.box6 {
+	right: 0;
+	top: 450px;
+}
+
+.box_1 {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	background-color: rgba(200, 200, 200, 0.3);
+	position: absolute;
+}
+
+.box1_1 {
+	left: 0;
+	top: 10px;
+}
+
+.box2_1 {
+	left: 0;
+	top: 230px;
+}
+
+.box3_1 {
+	left: 0;
+	top: 450px;
+}
+
+.box4_1 {
+	right: 0;
+	top: 10px;
+}
+
+.box5_1 {
+	right: 0;
+	top: 230px;
+}
+
+.box6_1 {
+	right: 0;
+	top: 450px;
+}
+
+/*.box1:hover, .box2:hover, .box3:hover, .box4:hover, .box5:hover, .box6:hover{
+			background-color:rgba(0, 0, 0, 0.5);
+			transition: .8s;
+		}*/
+.play1 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/salePlay1.png") center center
+		no-repeat;
+	background-size: auto 70%;
+	top: 0px;
+	left: 0;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.play2 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/salePlay2.png") center center
+		no-repeat;
+	background-size: auto 70%;
+	top: 230px;
+	left: 0;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.play3 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/salePlay3.png") center center
+		no-repeat;
+	background-size: auto 70%;
+	top: 450px;
+	left: 0px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.play4 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/salePlay4.png") center center
+		no-repeat;
+	background-size: auto 80%;
+	top: 0;
+	left: 0px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.play5 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/L2.128.5.77_min.png") center center
+		no-repeat;
+	background-size: auto 70%;
+	top: 230px;
+	left: 5px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.play6 {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: block;
+	background: url("../images/choose/salePlay6.png") center center
+		no-repeat;
+	background-size: auto 70%;
+	top: 450px;
+	left: 0px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+.saleLogo {
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	display: block;
+	top: 9%;
+	left: 37%;
+}
+
+.buy_btn {
+	width: 200px;
+	height: 50px;
+	position: absolute;
+	display: block;
+	top: 85%;
+	left: 50%;
+	margin-left: -100px;
+	background-color: rgba(200, 200, 200, 1);
+	border: 1px solid #FFF;
+	color: #000;
+	/*vertical-align: middle;*/
+	line-height: 50px;
+	font-size: 16px;
+	border-radius: 2px;
+	cursor: pointer;
+	font-family: 微軟正黑體;
+}
+
+.buy_btn:hover {
+	background-color: rgba(100, 100, 100, 1);
+	color: #ccc;
+	font-family: 微軟正黑體;
+}
+
+/* member */
+.bs_font{
+	position:relative;
+}
+iframe {
+	position: absolute;
+	top: 22%;
+	left: 56%;
+}
+
+.messageTr h1{
+	color:black;
+}
