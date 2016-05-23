@@ -8,12 +8,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>MS機械錶專賣店－後台介面</title>
-<!-- Bootstrap Core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom CSS -->
+<link href="../js/bootstrap.min.js">
 <link href="../css/simple-sidebar.css" rel="stylesheet">
-
-<!-- logo -->
 <link href='http://fonts.googleapis.com/css?family=Aldrich'
 	rel='stylesheet' type='text/css'>
 
