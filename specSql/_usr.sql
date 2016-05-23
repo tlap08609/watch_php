@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `usr`(
 `up` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY(`uid`),
 UNIQUE KEY `email` (`email`)
-)ENGINE=MyISAM DEFAULT CHARSET=utf8;
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 INSERT INTO `usr`(`uid`,`name`,`pw`,`email`,`cr`) VALUES
 ('7441005c-1cee-11e6-adf4-b888e3065a51','tlap08609','cool0519','tlap086091@livemail.tw',now()),
