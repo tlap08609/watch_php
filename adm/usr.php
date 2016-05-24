@@ -30,7 +30,7 @@ $where="";
 			<form action="usr.php" method="post">
 				<div class="panel panel-info"><div class=panel-heading><h3 class=panel-title>會員管理</h3></div><div class=panel-body>
 					<?php if (!empty($_POST['s'])) {$where.=" WHERE status=".trim($_POST['s']);}?>
-					<div class=col-sm-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s"><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
+					<div class=col-sm-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
 					<?php if (!empty($_POST['n'])) {$where.=" AND name LIKE '%".trim($_POST['n'])."%'";}?>
 					<?php //echo $_POST['n']?>
 					<div class=col-sm-3><div class=form-group><label for=n>帳號</label><input class=form-control name="n" id=n></div></div>
@@ -52,7 +52,7 @@ $where="";
 			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status
 					  FROM usr";
 			$result = $conn->query($sql.$where);
-			//echo $sql.$where;
+			echo $sql.$where;
 			if ($result) {
 				if ($result->num_rows > 0) {?>
 					<table class='table table-bordered table-hover'>
@@ -65,10 +65,10 @@ $where="";
 	 					}?>
 	 				</table><?php 
 	 			} else {?>
-	 			<p>目前尚無會員</p><?php
+	 			<p>無查詢結果,<a href='usr.php'>點我回上一頁</a></p><?php
 	 			} ?><?php 
 			} else {
-				echo "<p>無相關查詢,<a href='usr.php'>點我回上一頁</a></p>";
+				echo "Database Error";
 			}?>
  			</div>
 			</form>
