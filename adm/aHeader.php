@@ -9,7 +9,7 @@
 <meta name="author" content="">
 <title>MS機械錶專賣店－後台介面</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../js/bootstrap.min.js">
+<link rel="stylesheet" href="../css/jquery-ui.min.css">
 <link href="../css/simple-sidebar.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Aldrich'
 	rel='stylesheet' type='text/css'>
