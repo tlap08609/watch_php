@@ -72,7 +72,7 @@ if (isset($_POST['da'])) {
 			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status
 					  FROM usr";
 			$result = $conn->query($sql.$where.$orderBy);
-			echo $sql.$where.$orderBy;
+			//echo $sql.$where.$orderBy;
 			if ($result) {
 				if ($result->num_rows > 0) {?>
 					<table class='table table-bordered table-hover'>
@@ -149,7 +149,7 @@ if (isset($_POST['da'])) {
 
 
 
-
+<?php include('../specSql/pager.php');?>
 <?php include('aFooter.php');?>
 <script>
   $(function() {
@@ -191,7 +191,7 @@ if (isset($_POST['da'])) {
       });
     $( "#oUid,#oEmail,#oCr,#oUp" ).button({
         icons: {
-      	primary: "ui-icon-triangle-1-s",
+      	primary: "ui-icon-circle-triangle-s",
         },
         text: false
       })
