@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS `usr`(
 `status` tinyint(1) NULL DEFAULT '1' COMMENT '1 current member 0 not current',
 `cr` timestamp NULL DEFAULT NULL,
 `up` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+`crIP` varchar(21) DEFAULT NULL,
+`upIP` varchar(21) DEFAULT NULL,
 PRIMARY KEY(`uid`),
 UNIQUE KEY `email` (`email`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;

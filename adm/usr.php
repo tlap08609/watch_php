@@ -15,7 +15,7 @@ if (isset($_POST['d'])) {
 // 	echo $_POST['e'];
 // }
 
-$where="";
+
 //ip
 //https://portswigger.net/burp/proxy.html
 //http://php.net/manual/en/reserved.variables.server.php
@@ -29,8 +29,8 @@ $where="";
 		<div class="row"><div class="col-md-12">
 			<form action="usr.php" method="post">
 				<div class="panel panel-info"><div class=panel-heading><h3 class=panel-title>會員管理</h3></div><div class=panel-body>
-					<?php if (!empty($_POST['s'])) {$where.=" WHERE status=".trim($_POST['s']);}?>
-					<div class=col-sm-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
+					<?php $where=""; if (isset($_POST['s'])) {if (trim($_POST['s']) == 2){$where.=" WHERE status>=0";}else {$where.=" WHERE status=".trim($_POST['s']);}}?>
+					<div class=col-sm-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="2">全部</option><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
 					<?php if (!empty($_POST['n'])) {$where.=" AND name LIKE '%".trim($_POST['n'])."%'";}?>
 					<?php //echo $_POST['n']?>
 					<div class=col-sm-3><div class=form-group><label for=n>帳號</label><input class=form-control name="n" id=n></div></div>
