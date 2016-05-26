@@ -58,8 +58,9 @@
 						<p class="logotext">機械錶專賣店</p>
 				</a></li>
 				<li><a href="adminQueryMember">系統參數設定</a></li>
-				<li><a href="auth.php">管理員權限管理</a></li>
+				<li><a href="admin.php">管理員權限管理</a></li>
 				<li><a href="usr.php">會員管理</a></li>
+				<li><a href="usr.php">最新訊息管理</a></li>
 				<li><a href="admin_manageSlider.jsp">廣告管理</a></li>
 				<li><a href="ShowProductAdmin">商城管理</a></li>
 				<li><a href="adminQueryOrder">訂單管理</a></li>

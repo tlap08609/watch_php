@@ -29,11 +29,13 @@ if (isset($_POST['da'])) {
 			<form action="usr.php" method="post">
 				<div class="panel panel-info"><div class=panel-heading><h3 class=panel-title>會員管理</h3></div><div class=panel-body><div class="row">
 					<?php $where=""; if (isset($_POST['s'])) {if (trim($_POST['s']) == 2){$where.=" WHERE status>=0";}else {$where.=" WHERE status=".trim($_POST['s']);}}?>
-					<div class=col-md-4><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="2">全部</option><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
+					<div class=col-md-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="2">全部</option><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
 					<?php if (!empty($_POST['n'])) {$where.=" AND name LIKE '%".trim($_POST['n'])."%'";}?>
-					<div class=col-md-4><div class=form-group><label for=n>帳號</label><input class=form-control name="n" id=n></div></div>
+					<div class=col-md-3><div class=form-group><label for=n>帳號</label><input class=form-control name="n" id=n></div></div>
 					<?php if (!empty($_POST['e'])) {$where.=" AND email LIKE '%".trim($_POST['e'])."%'";}?>
-					<div class=col-md-4><div class=form-group><label for=e>信箱</label><input class=form-control name="e" id=e></div></div></div>
+					<div class=col-md-3><div class=form-group><label for=e>信箱</label><input class=form-control name="e" id=e></div></div>
+					<?php if (!empty($_POST['c'])) {$where.=" AND crIP LIKE '%".trim($_POST['c'])."%'";}?>
+					<div class=col-md-3><div class=form-group><label for=c>最後登入IP</label><input class=form-control name="c" id=c></div></div></div>
 					<?php $crFlag=true;?>
 					<?php if(!empty($_POST['crFrom']) && !empty($_POST['crTo'])) {$where.=" AND (cr >'".trim($_POST['crFrom'])."' AND cr<'".trim($_POST['crTo'])."')"; $crFlag=false;}?>
 					<?php if($crFlag) {
@@ -69,7 +71,7 @@ if (isset($_POST['da'])) {
 					$orderBy=" ORDER BY up DESC";
 				}			
 			}
-			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status
+			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status,crIP,upIP
 					  FROM usr";
 			$result = $conn->query($sql.$where);
 			/******************************************************************/
@@ -86,9 +88,9 @@ if (isset($_POST['da'])) {
 			if ($result) {
 				if ($result->num_rows > 0) {?>
 					<table class='table table-bordered table-hover'>
-						<tr><th>帳號<button id='oUid' name="ob" value="1"></th><th>電子郵件信箱<button id='oEmail' name="ob" value="2"></th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間<button id='oCr' name="ob" value="3"></button></th><th>最後更新時間<button id='oUp' name="ob" value="4"></button></th><th>會員狀態</th><th></th></tr><?php 
+						<tr><th>帳號<button id='oUid' name="ob" value="1"></th><th>電子郵件信箱<button id='oEmail' name="ob" value="2"></th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間<button id='oCr' name="ob" value="3"></button></th><th>最後更新時間<button id='oUp' name="ob" value="4"></button></th><th>會員狀態</th><th>最後登入IP</th><th></th></tr><?php 
 						while($row = $result->fetch_assoc()) {?>
-							<tr><td><?php echo $row["name"]?></td><td><?php echo $row["email"]?></td><td><?php echo empty($row["tel"])?"無":$row["tel"]?></td><td><?php echo empty($row["mobile"])?"無":$row["mobile"]?></td><td><?php echo empty($row["address"])?"無":$row["address"]?></td><td><?php echo $row["cr"]?></td><td><?php echo $row["up"]?></td><td><?php echo ($row["status"]==1)?"上線會員":"禁用會員"?></td>
+							<tr><td><?php echo $row["name"]?></td><td><?php echo $row["email"]?></td><td><?php echo empty($row["tel"])?"無":$row["tel"]?></td><td><?php echo empty($row["mobile"])?"無":$row["mobile"]?></td><td><?php echo empty($row["address"])?"無":$row["address"]?></td><td><?php echo $row["cr"]?></td><td><?php echo $row["up"]?></td><td><?php echo ($row["status"]==1)?"上線會員":"禁用會員"?></td><td><?php echo $row["crIP"]?></td>
 							<td><div class=btn-group role=group><input type="hidden" name="mn" value="<?php echo $row['name']?>"/><input type="hidden" name="me" value="<?php echo $row['email']?>"/>
 							<button class="btn btn-primary v" name="v" value="<?php echo $row['uid']?>">查看</button>
 							<?php if ($row["status"]==1) {?><button class="btn btn-warning" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 

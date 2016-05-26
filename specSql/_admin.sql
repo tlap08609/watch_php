@@ -9,8 +9,10 @@ CREATE TABLE IF NOT EXISTS `adm`(
 `up` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 `crIP` varchar(21) DEFAULT NULL,
 `upIP` varchar(21) DEFAULT NULL,
-PRIMARY KEY(`uid`)
+PRIMARY KEY(`uid`),
+UNIQUE KEY `email` (`email`)
 )ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `adm` (`uid`,`name`,`pw`,`email`,`cr`) VALUES 
-(uuid(),'java001','java001','tlap086091@livemail.tw',now())
+INSERT INTO `adm` (`uid`,`name`,`pw`,`email`,`cr`,`crIP`,`upIP`) VALUES 
+(uuid(),'java001','java001','tlap086091@livemail.tw',now(),'127.0.0.1','127.0.0.3'),
+(uuid(),'allan','1234','allan@livemail.tw',now(),'127.0.0.1','127.0.0.2')
