@@ -2,6 +2,7 @@
     </div>
 <!-- jQuery -->
 <script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/jquery.tablesorter.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="../js/bootstrap.min.js"></script>
 <!-- Menu Toggle Script -->

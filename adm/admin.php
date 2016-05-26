@@ -4,27 +4,58 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
-				<h1>管理者xxx，你好！</h1>
-				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle
-					Menu</a>
+<table id="myTable" class="tablesorter"> 
+<thead> 
+<tr> 
+    <th>Last Name</th> 
+    <th>First Name</th> 
+    <th>Email</th> 
+    <th>Due</th> 
+    <th>Web Site</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+    <td>Smith</td> 
+    <td>John</td> 
+    <td>jsmith@gmail.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.jsmith.com</td> 
+</tr> 
+<tr> 
+    <td>Bach</td> 
+    <td>Frank</td> 
+    <td>fbach@yahoo.com</td> 
+    <td>$50.00</td> 
+    <td>http://www.frank.com</td> 
+</tr> 
+<tr> 
+    <td>Doe</td> 
+    <td>Jason</td> 
+    <td>jdoe@hotmail.com</td> 
+    <td>$100.00</td> 
+    <td>http://www.jdoe.com</td> 
+</tr> 
+<tr> 
+    <td>Conway</td> 
+    <td>Tim</td> 
+    <td>tconway@earthlink.net</td> 
+    <td>$50.00</td> 
+    <td>http://www.timconway.com</td> 
+</tr> 
+</tbody> 
+</table> 
 
-<?php
-include ('../specSql/db_connection.php');
-$sql = "SELECT uid,email FROM usr";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    echo "<table><tr><th>uid</th><th>email</th></tr>";
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["uid"]."</td><td>".$row["email"]."</td></tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
-}
-?>
+
+
 			</div>
 		</div>
 	</div>
 </div>
 <?php include('aFooter.php');?>
+<script>
+$(function(){
+	$("#myTable").tablesorter(); 
+})
+</script>

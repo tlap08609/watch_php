@@ -46,6 +46,15 @@
 	left: 81px;
 	top: 10px;
 }
+th.header {
+ cursor: pointer;
+}
+th.headerSortUp {
+ background-color: gray;
+}
+th.headerSortDown {
+ background-color: gray;
+}
 </style>
 </head>
 <body>

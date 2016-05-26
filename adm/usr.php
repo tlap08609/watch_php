@@ -8,9 +8,8 @@ if (isset($_POST['d'])) {
 }
 if (isset($_POST['status'])) {
 	include ('../specSql/db_connection.php');
-	$status = $_POST['status'];
 	$stmt = $conn->prepare("UPDATE usr SET status=CASE WHEN status=0 THEN 1 ELSE 0 END WHERE uid=?");
-	$stmt->bind_param("s", $status);
+	$stmt->bind_param("s", $_POST['status']);
 	$stmt->execute();
 }
 //ip
@@ -57,21 +56,6 @@ if (isset($_POST['status'])) {
 					<button type=submit class="btn btn-default">查詢</button>
 				</div></div>
 			<?php
-			$orderBy = "";
-			if (!empty($_POST["ob"])) {
-				if (trim($_POST["ob"])==1) {
-					$orderBy=" ORDER BY name DESC";
-				}
-				if (trim($_POST["ob"])==2) {
-					$orderBy=" ORDER BY email DESC";
-				}
-				if (trim($_POST["ob"])==3) {
-					$orderBy=" ORDER BY cr DESC";
-				}
-				if (trim($_POST["ob"])==4) {
-					$orderBy=" ORDER BY up DESC";
-				}			
-			}
 			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status,crIP,upIP
 					  FROM usr";
 			$result = $conn->query($sql.$where);
@@ -83,20 +67,21 @@ if (isset($_POST['status'])) {
 			$pageTotal = ceil($total / $pageSplit);
 			$pageStart = ($pageNo * $pageSplit) - $pageSplit;
 			$limit = " LIMIT " . $pageStart .", ". $pageSplit." ";
-			$result = $conn->query($sql.$where.$orderBy.$limit);
+			$result = $conn->query($sql.$where.$limit);
 			/******************************************************************/
-			echo $sql.$where.$orderBy.$limit;
+			echo $sql.$where.$limit;
 			if ($result) {
 				if ($result->num_rows > 0) {?>
-					<table class='table table-bordered table-hover'>
-						<tr><th>帳號<button id='oUid' name="ob" value="1"></th><th>電子郵件信箱<button id='oEmail' name="ob" value="2"></th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間<button id='oCr' name="ob" value="3"></button></th><th>最後更新時間<button id='oUp' name="ob" value="4"></button></th><th>會員狀態</th><th>最後登入IP</th><th></th></tr><?php 
+					<table id="myTable" class='tablesorter table table-bordered table-hover'>
+						<!-- <thead><tr><th>帳號<button id='oUid' class="o" name="ob" value="1"></th><th>電子郵件信箱<button id='oEmail' class="o" name="ob" value="2"></th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間<button id='oCr' class="o" name="ob" value="3"></button></th><th>最後更新時間<button id='oUp' class="o" name="ob" value="4"></button></th><th>會員狀態</th><th>最後登入IP</th><th></th></tr></thead><tbody> -->
+						<thead><tr><th>帳號</th><th>電子郵件信箱</th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間</th><th>最後更新時間</th><th>會員狀態</th><th>最後登入IP</th><th></th></tr></thead><tbody><?php
 						while($row = $result->fetch_assoc()) {?>
 							<tr><td><?php echo $row["name"]?></td><td><?php echo $row["email"]?></td><td><?php echo empty($row["tel"])?"無":$row["tel"]?></td><td><?php echo empty($row["mobile"])?"無":$row["mobile"]?></td><td><?php echo empty($row["address"])?"無":$row["address"]?></td><td><?php echo $row["cr"]?></td><td><?php echo $row["up"]?></td><td><?php echo ($row["status"]==1)?"上線會員":"禁用會員"?></td><td><?php echo $row["crIP"]?></td>
 							<td><div class=btn-group role=group><input type="hidden" name="mn" value="<?php echo $row['name']?>"/><input type="hidden" name="me" value="<?php echo $row['email']?>"/>
 							<button class="btn btn-primary v" name="v" value="<?php echo $row['uid']?>">查看</button>
 							<?php if ($row["status"]==1) {?><button class="btn btn-warning da" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info da" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 
 	 					}?>
-	 				</table>
+	 				</tbody></table>
 					<!-- pager -->
 					<nav><ul class="pager"><?php if($pageNo > 1) {?><li><a href='usr.php?page=1' /><span aria-hidden="true">&larr;</span> 第一頁</a></li><?php } if($pageNo > 1) {?><li><a href='usr.php?page=<?php echo $pageNo-1?>' /> 上一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageNo+1?>' /> 下一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageTotal?>' /> 最後一頁</a></li><?php }?></ul></nav>
 	 				<!-- pager --><?php 
@@ -205,12 +190,6 @@ if (isset($_POST['status'])) {
           $( "#upFrom" ).datepicker( "option", "maxDate", selectedDate );
         }
       });
-    $( "#oUid,#oEmail,#oCr,#oUp" ).button({
-        icons: {
-      	primary: "ui-icon-circle-triangle-s",
-        },
-        text: false
-      })
     $('.v').click(function(e){
 		e.preventDefault();
 		var modal = $('#m');
@@ -232,7 +211,8 @@ if (isset($_POST['status'])) {
         $status = $(this).attr('value');
    		$.post("usr.php","status="+$status);
    		location.reload();
-    })    
+    }) 
+   	$("#myTable").tablesorter(); 
 //     $('#s').change(function() { 
 //         $(this).parents('form').submit(); 
 //      });
