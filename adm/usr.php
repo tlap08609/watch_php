@@ -6,10 +6,11 @@ if (isset($_POST['v'])) {
 if (isset($_POST['d'])) {
 //TODO 刪除
 }
-if (isset($_POST['da'])) {
+if (isset($_POST['status'])) {
 	include ('../specSql/db_connection.php');
+	$status = $_POST['status'];
 	$stmt = $conn->prepare("UPDATE usr SET status=CASE WHEN status=0 THEN 1 ELSE 0 END WHERE uid=?");
-	$stmt->bind_param("s", $_POST['da']);
+	$stmt->bind_param("s", $status);
 	$stmt->execute();
 }
 //ip
@@ -93,7 +94,7 @@ if (isset($_POST['da'])) {
 							<tr><td><?php echo $row["name"]?></td><td><?php echo $row["email"]?></td><td><?php echo empty($row["tel"])?"無":$row["tel"]?></td><td><?php echo empty($row["mobile"])?"無":$row["mobile"]?></td><td><?php echo empty($row["address"])?"無":$row["address"]?></td><td><?php echo $row["cr"]?></td><td><?php echo $row["up"]?></td><td><?php echo ($row["status"]==1)?"上線會員":"禁用會員"?></td><td><?php echo $row["crIP"]?></td>
 							<td><div class=btn-group role=group><input type="hidden" name="mn" value="<?php echo $row['name']?>"/><input type="hidden" name="me" value="<?php echo $row['email']?>"/>
 							<button class="btn btn-primary v" name="v" value="<?php echo $row['uid']?>">查看</button>
-							<?php if ($row["status"]==1) {?><button class="btn btn-warning" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 
+							<?php if ($row["status"]==1) {?><button class="btn btn-warning da" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info da" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 
 	 					}?>
 	 				</table>
 					<!-- pager -->
@@ -225,6 +226,12 @@ if (isset($_POST['da'])) {
 		modal.find(".modal-title").text("刪除");
 		modal.modal('show');
         
+    })
+    $('.da').click(function(e){
+        e.preventDefault();
+        $status = $(this).attr('value');
+   		$.post("usr.php","status="+$status);
+   		location.reload();
     })    
 //     $('#s').change(function() { 
 //         $(this).parents('form').submit(); 
