@@ -71,8 +71,18 @@ if (isset($_POST['da'])) {
 			}
 			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status
 					  FROM usr";
-			$result = $conn->query($sql.$where.$orderBy);
-			//echo $sql.$where.$orderBy;
+			$result = $conn->query($sql.$where);
+			/******************************************************************/
+			// 分頁程式
+			$total = $result->num_rows;
+			$pageNo = (empty($_GET['page'])) ? 1 : $_GET['page'];
+			$pageSplit = 3;	
+			$pageTotal = ceil($total / $pageSplit);
+			$pageStart = ($pageNo * $pageSplit) - $pageSplit;
+			$limit = " LIMIT " . $pageStart .", ". $pageSplit." ";
+			$result = $conn->query($sql.$where.$orderBy.$limit);
+			/******************************************************************/
+			echo $sql.$where.$orderBy.$limit;
 			if ($result) {
 				if ($result->num_rows > 0) {?>
 					<table class='table table-bordered table-hover'>
@@ -83,8 +93,11 @@ if (isset($_POST['da'])) {
 							<button class="btn btn-primary v" name="v" value="<?php echo $row['uid']?>">查看</button>
 							<?php if ($row["status"]==1) {?><button class="btn btn-warning" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 
 	 					}?>
-	 				</table><?php 
-	 			} else {?>
+	 				</table>
+					<!-- pager -->
+					<nav><ul class="pager"><?php if($pageNo > 1) {?><li><a href='usr.php?page=1' /><span aria-hidden="true">&larr;</span> 第一頁</a></li><?php } if($pageNo > 1) {?><li><a href='usr.php?page=<?php echo $pageNo-1?>' /> 上一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageNo+1?>' /> 下一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageTotal?>' /> 最後一頁</a></li><?php }?></ul></nav>
+	 				<!-- pager --><?php 
+		  		} else {?>
 	 			<p>無查詢結果,<a href='usr.php'>點我回上一頁</a></p><?php
 	 			} ?><?php 
 			} else {
@@ -149,7 +162,7 @@ if (isset($_POST['da'])) {
 
 
 
-<?php include('../specSql/pager.php');?>
+
 <?php include('aFooter.php');?>
 <script>
   $(function() {

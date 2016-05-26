@@ -16,9 +16,12 @@ PRIMARY KEY(`uid`),
 UNIQUE KEY `email` (`email`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-INSERT INTO `usr`(`uid`,`name`,`pw`,`email`,`cr`) VALUES
-('7441005c-1cee-11e6-adf4-b888e3065a51','tlap08609','cool0519','tlap086091@livemail.tw',now()),
-('c59c5aa1-1cef-11e6-adf4-b888e3065a51','alice','1300197','alice@livemail.tw',now()),
-(uuid(),'eva','eva197','eva@livemail.tw',now()),
-(uuid(),'mom','mom197','mom@livemail.tw',now()),
-(uuid(),'father','fat197','father@livemail.tw',now())
+INSERT INTO `usr`(`uid`,`name`,`pw`,`email`,`cr`,`crIP`,`upIP`) VALUES
+('7441005c-1cee-11e6-adf4-b888e3065a51','tlap08609','cool0519','tlap086091@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
+('c59c5aa1-1cef-11e6-adf4-b888e3065a51','alice','1300197','alice@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
+(uuid(),'eva','eva197','eva@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
+(uuid(),'mom','mom197','mom@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
+(uuid(),'father','fat197','father@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
+(uuid(),'uncle','uncle197','uncle@livemail.tw',now(),'127.0.0.1','127.0.0.1'),
+(uuid(),'grandmother','grandmother197','grandmother@livemail.tw',now(),'127.0.0.1','127.0.0.1'),
+(uuid(),'grandfather','grandfather197','grandfather@livemail.tw',now(),'127.0.0.1','127.0.0.1')
