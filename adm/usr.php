@@ -1,4 +1,4 @@
-<?php include('aHeader.php');include ('../specSql/db_connection.php')?>
+<?php include('aHeader.php');?>
 <?php 
 if (isset($_POST['v'])) {
 //TODO 編輯
@@ -12,24 +12,15 @@ if (isset($_POST['status'])) {
 	$stmt->bind_param("s", $_POST['status']);
 	$stmt->execute();
 }
-//ip
-//https://portswigger.net/burp/proxy.html
-//http://php.net/manual/en/reserved.variables.server.php
-//http://devco.re/blog/2014/06/19/client-ip-detection/
-
-//http://rettamkrad.blogspot.tw/2013/04/ajaxandhistoryapi.html
-//http://140.115.236.72/demo-personal/xd702/web/C1300152/front/pageLink(jquery)_test.html#page=2
-//time picker
-//http://trentrichardson.com/examples/timepicker/
 ?>
 <!-- Page Content -->
 <div id="page-content-wrapper">
 	<div class="container-fluid">
 		<div class="row"><div class="col-md-12">
-			<form action="usr.php" method="post">
+			<form action="usr.php" method="post">	
 				<div class="panel panel-info"><div class=panel-heading><h3 class=panel-title>會員管理</h3></div><div class=panel-body><div class="row">
-					<?php $where=""; if (isset($_POST['s'])) {if (trim($_POST['s']) == 2){$where.=" WHERE status>=0";}else {$where.=" WHERE status=".trim($_POST['s']);}}?>
-					<div class=col-md-3><div class=form-group><label for=s>會員狀態</label><select class=form-control id="s" name="s"><option value="2">全部</option><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
+					<?php $where=""; if (isset($_POST['s'])) {if (trim($_POST['s']) == 2){$where.=" WHERE status>=0";}else {$where.=" WHERE status=".trim($_POST['s']);}}?>  
+					<div class=col-md-3><div class=form-group><label for="s">會員狀態</label><select class=form-control id="s" name="s"><option value="2">全部</option><option value="1">上線會員</option><option value="0">禁用會員</option></select></div></div>
 					<?php if (!empty($_POST['n'])) {$where.=" AND name LIKE '%".trim($_POST['n'])."%'";}?>
 					<div class=col-md-3><div class=form-group><label for=n>帳號</label><input class=form-control name="n" id=n></div></div>
 					<?php if (!empty($_POST['e'])) {$where.=" AND email LIKE '%".trim($_POST['e'])."%'";}?>
@@ -55,44 +46,15 @@ if (isset($_POST['status'])) {
 				<div class=panel-footer>
 					<button type=submit class="btn btn-default">查詢</button>
 				</div></div>
-			<?php
-			$sql = "SELECT uid,name,email,tel,mobile,address,cr,up,status,crIP,upIP
-					  FROM usr";
-			$result = $conn->query($sql.$where);
-			/******************************************************************/
-			// 分頁程式
-			$total = $result->num_rows;
-			$pageNo = (empty($_GET['page'])) ? 1 : $_GET['page'];
-			$pageSplit = 3;	
-			$pageTotal = ceil($total / $pageSplit);
-			$pageStart = ($pageNo * $pageSplit) - $pageSplit;
-			$limit = " LIMIT " . $pageStart .", ". $pageSplit." ";
-			$result = $conn->query($sql.$where.$limit);
-			/******************************************************************/
-			echo $sql.$where.$limit;
-			if ($result) {
-				if ($result->num_rows > 0) {?>
-					<table id="myTable" class='tablesorter table table-bordered table-hover'>
-						<!-- <thead><tr><th>帳號<button id='oUid' class="o" name="ob" value="1"></th><th>電子郵件信箱<button id='oEmail' class="o" name="ob" value="2"></th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間<button id='oCr' class="o" name="ob" value="3"></button></th><th>最後更新時間<button id='oUp' class="o" name="ob" value="4"></button></th><th>會員狀態</th><th>最後登入IP</th><th></th></tr></thead><tbody> -->
-						<thead><tr><th>帳號</th><th>電子郵件信箱</th><th>電話</th><th>手機</th><th>地址</th><th>註冊時間</th><th>最後更新時間</th><th>會員狀態</th><th>最後登入IP</th><th></th></tr></thead><tbody><?php
-						while($row = $result->fetch_assoc()) {?>
-							<tr><td><?php echo $row["name"]?></td><td><?php echo $row["email"]?></td><td><?php echo empty($row["tel"])?"無":$row["tel"]?></td><td><?php echo empty($row["mobile"])?"無":$row["mobile"]?></td><td><?php echo empty($row["address"])?"無":$row["address"]?></td><td><?php echo $row["cr"]?></td><td><?php echo $row["up"]?></td><td><?php echo ($row["status"]==1)?"上線會員":"禁用會員"?></td><td><?php echo $row["crIP"]?></td>
-							<td><div class=btn-group role=group><input type="hidden" name="mn" value="<?php echo $row['name']?>"/><input type="hidden" name="me" value="<?php echo $row['email']?>"/>
-							<button class="btn btn-primary v" name="v" value="<?php echo $row['uid']?>">查看</button>
-							<?php if ($row["status"]==1) {?><button class="btn btn-warning da" name="da" value="<?php echo $row['uid']?>">停用</button><?php } else{?><button class="btn btn-info da" name="da" value="<?php echo $row['uid']?>">啟用</button><button class="btn btn-danger d" name="d" value="<?php echo $row['uid']?>">刪除</button><?php }?></div></td></tr><?php 
-	 					}?>
-	 				</tbody></table>
-					<!-- pager -->
-					<nav><ul class="pager"><?php if($pageNo > 1) {?><li><a href='usr.php?page=1' /><span aria-hidden="true">&larr;</span> 第一頁</a></li><?php } if($pageNo > 1) {?><li><a href='usr.php?page=<?php echo $pageNo-1?>' /> 上一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageNo+1?>' /> 下一頁</a></li><?php } if($pageNo != $pageTotal) {?><li><a href='usr.php?page=<?php echo $pageTotal?>' /> 最後一頁</a></li><?php }?></ul></nav>
-	 				<!-- pager --><?php 
-		  		} else {?>
-	 			<p>無查詢結果,<a href='usr.php'>點我回上一頁</a></p><?php
-	 			} ?><?php 
-			} else {
-				echo "Database Error";
-			}?>
+				<div id="results">
+			
+			<?php include('usr_result.php');?>
+			
+			
+			</div>
  			</div>
 			</form>
+			<div class="test"></div>
 			</div>
 		</div>
 	</div>
@@ -131,7 +93,7 @@ if (isset($_POST['status'])) {
 </div>
 <div class="row mar-bottom10">
 	<div class="col-xs-2 col-sm-2"><label>電話</label></div>
-	<div class="col-xs-10 col-sm-10"><input class=form-control name=h></div>
+	<div class="col-xs-10 co	grandalice@livemail.tw	無	l-sm-10"><input class=form-control name=h></div>
 </div>
 <div class="row mar-bottom10">
 	<div class="col-xs-2 col-sm-2"><label>手機</label></div>
@@ -190,15 +152,26 @@ if (isset($_POST['status'])) {
           $( "#upFrom" ).datepicker( "option", "maxDate", selectedDate );
         }
       });
-    $('.v').click(function(e){
+
+
+    $("#results").on('click','.v',function(e){
 		e.preventDefault();
 		var modal = $('#m');
 		var data = $(this).parent().parent().find($('input[name^=mn]')).val();
 		modal.find(".modal-title").text("會員資料");
 		modal.find('input[name=e]').val(data);
 		modal.modal('show');
-        
     })
+//     $('.v').click(function(e){
+//         alert('clicked');
+// 		e.preventDefault();
+// 		var modal = $('#m');
+// 		var data = $(this).parent().parent().find($('input[name^=mn]')).val();
+// 		modal.find(".modal-title").text("會員資料");
+// 		modal.find('input[name=e]').val(data);
+// 		modal.modal('show');
+        
+//     })
     $('.d').click(function(e){
 		e.preventDefault();
 		var modal = $('#m');
@@ -206,16 +179,86 @@ if (isset($_POST['status'])) {
 		modal.modal('show');
         
     })
-    $('.da').click(function(e){
-        e.preventDefault();
-        $status = $(this).attr('value');
-   		$.post("usr.php","status="+$status);
+//     $('.da').click(function(e){
+//         e.preventDefault();
+//         $status = $(this).attr('value');
+//    		$.post("usr.php","status="+$status);a 
+//    		$.ajax({
+// 			type:"POST",
+// 			data:"status="+$status,
+// 			success:function(data){console.log(data);}
+
+//    	   		})
+//    		location.reload();
+//     }) 
+   	$("#results").on("click",".da",function(e){
+   	   	e.preventDefault();
+   	 	$status = $(this).attr('value');
+   	   	console.log($status);
+   	 	//$("#results").load("usr_result.php?page="+$page);
+   	 	$.post("usr.php",{"status":$status});
    		location.reload();
-    }) 
-   	$("#myTable").tablesorter(); 
+   	})	
+	$("#myTable").tablesorter();
+   	$("#results").on("click",".pager a",function(e){
+   	   	e.preventDefault();
+   	   	$page = $(this).data('page');
+   	   	//console.log($page);
+   	 	//$("#results").load("usr_result.php?page="+$page);
+   	   	$("#results").load("usr_result.php",{"page":$page},function(){$("#myTable").tablesorter();});
+   	   	
+   	})
+//    	$('.before').click(function(e){
+// 		e.preventDefault();
+// 		$wh = $(this).data('where');
+// 		$be = $(this).data('before');
+// 		//alert('before');
+// 		if ($wh=='') {
+// 			//alert("empty");
+// 			$.get("usr.php","page="+$be);
+// 			location.reload();
+// 		} else {
+// // 			$.post("usr.php","page="$be"&where="+$wh);
+// // 			location.reload();
+// 		}
+//    	}) 
+   	//$('.after').click(function(e){
+		//e.preventDefault();
+		//$wh = $(this).data('where');
+		//$af = $(this).data('after');
+		//console.log($wh);
+		//console.log($af);
+		//if ($wh=='') {
+			//alert("empty");
+			//$.get("","page="+$af);
+ //$("table").remove('tr');
+//$("table").load("usr.php?page="+$af+"#myTable");
+// $.ajax({
+//    type: "GET",
+//    url: "usr.php",
+//    data: "page="+$af,
+//    //error: function (xhr) { alert('xhr'+xhr); },      // 錯誤後執行的函數
+//    success: function (data) { 
+// 	   //console.log(data);
+// 	   //$('form').remove('table');
+// // 	   $data = $(data).filter('table');
+//  	   $('.test').html(data);
+// 	   //console.log(data);
+	   
+// 	}// 成功後要執行的函數
+   
+// });		
+//location.reload();
+			//location.reload();
+		//} else{
+// 			$.get("usr.php","page="+$af);
+// 			$.post("usr.php","page="+$af"&where="+$wh);
+// 			location.reload();
+		//}	
+   //	}) 
 //     $('#s').change(function() { 
 //         $(this).parents('form').submit(); 
 //      });
-
+		
   });
  </script>

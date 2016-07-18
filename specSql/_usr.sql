@@ -24,4 +24,8 @@ INSERT INTO `usr`(`uid`,`name`,`pw`,`email`,`cr`,`crIP`,`upIP`) VALUES
 (uuid(),'father','fat197','father@livemail.tw','2016-03-24 16:00:21','127.0.0.1','127.0.0.1'),
 (uuid(),'uncle','uncle197','uncle@livemail.tw',now(),'127.0.0.1','127.0.0.1'),
 (uuid(),'grandmother','grandmother197','grandmother@livemail.tw',now(),'127.0.0.1','127.0.0.1'),
-(uuid(),'grandfather','grandfather197','grandfather@livemail.tw',now(),'127.0.0.1','127.0.0.1')
+(uuid(),'grandfather','grandfather197','grandfather@livemail.tw',now(),'127.0.0.1','127.0.0.1'),
+(uuid(),'grandtim','grandtim','grandtim@livemail.tw','2016-03-24 16:00:21','127.0.0.2','127.0.0.1'),
+(uuid(),'grandeva','grandeva197','grandeva@livemail.tw',now(),'127.0.0.1','127.0.0.3'),
+(uuid(),'grandalice','grandalice197','grandalice@livemail.tw',now(),'127.0.0.4','127.0.0.1'),
+(uuid(),'granduncle','granduncle197','granduncle@livemail.tw',now(),'127.0.0.5','127.0.0.1')
